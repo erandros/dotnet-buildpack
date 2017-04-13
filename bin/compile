@@ -170,4 +170,5 @@ fi
 
 echo "Updating database"
 cd ${SRC_DIR}/src/lakyu
+echo $PWD
 dotnet ef database update
