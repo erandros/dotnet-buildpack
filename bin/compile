@@ -53,9 +53,9 @@ then
 		npm install -g bower		
 	fi
 	echo "Installing gulp"		
- +	if ! hash gulp 2>/dev/null; then
- +		npm install -g gulp
- +	fi
+ 	if ! hash gulp 2>/dev/null; then
+ 		npm install -g gulp
+ 	fi
 fi
 
 # Install .NET Core
