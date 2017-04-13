@@ -20,7 +20,8 @@ source $BUILDPACK_DIR/bin/util
 export_env_dir ${ENV_DIR}
 
 : ${CORE_VERSION:="latest"}
-: ${CORE_CHANNEL:="preview"}
+: ${CORE_CHANNEL:="preview"}		
+: ${NODE_VERSION:="4.4.4"}
 
 if [ -n "$BUILD_DEBUG" ]; then
 	CORE_CONFIGURATION="Debug"
