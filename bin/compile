@@ -115,6 +115,9 @@ rm -rf $TEMP_DIR
 echo "Restoring packages in projects"
 dotnet restore ${SRC_DIR}/src
 
+echo "Restoring packages in projects"
+dotnet ef data ${SRC_DIR}/src
+
 # configure some npm command during building
 export PATH="${PROJECT_DIR}/node_modules/.bin:${PATH}"
 
@@ -164,3 +167,7 @@ if [ -f $SRC_DIR/.post_compile ]; then
 else
 	echo "File $SRC_DIR/.post_compile not found"	
 fi
+
+echo "Updating database"
+cd ${SRC_DIR}/src/lakyu
+dotnet ef database update
