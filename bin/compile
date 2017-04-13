@@ -164,9 +164,3 @@ if [ -f $SRC_DIR/.post_compile ]; then
 else
 	echo "File $SRC_DIR/.post_compile not found"	
 fi
-
-echo "Updating database"
-cd ${SRC_DIR}/src/lakyu
-echo "Current path"
-echo $PWD
-dotnet ef database update
