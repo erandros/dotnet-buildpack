@@ -115,9 +115,6 @@ rm -rf $TEMP_DIR
 echo "Restoring packages in projects"
 dotnet restore ${SRC_DIR}/src
 
-echo "Restoring packages in projects"
-dotnet ef data ${SRC_DIR}/src
-
 # configure some npm command during building
 export PATH="${PROJECT_DIR}/node_modules/.bin:${PATH}"
 
