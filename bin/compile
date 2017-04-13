@@ -39,6 +39,21 @@ SRC_DIR=`mktemp -d`
 
 mkdir -p ${CACHE_DIR}
 
+# TODO: This test doesn't seen to actually work		
+# TODO: Maybe just run `npm install -g` and if anything is missing, install it after		
+if [[ -n $(find ${SRC_DIR} -type f -iname package.json -o -iname bower.json) ]]		
+then		
+	echo "Installing Node"		
+	NODE_PATH=`mktemp -d`		
+	curl https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz -Ls \		
+		| tar xz -C ${NODE_PATH}		
+	export PATH="${NODE_PATH}/node-v${NODE_VERSION}-linux-x64/bin:${PATH}"		
+	echo "Installing bower"		
+	if ! hash bower 2>/dev/null; then		
+		npm install -g bower		
+	fi		
+fi
+
 # Install .NET Core
 echo "Get .NET Core Version and Channel from the PROJECT"
 DEPLOYMENT_FILE_LOCATION=${SRC_DIR}/.deployment
@@ -95,6 +110,9 @@ rm -rf $TEMP_DIR
 
 echo "Restoring packages in projects"
 dotnet restore ${SRC_DIR}/src
+
+# configure some npm command during building
+export PATH="${PROJECT_DIR}/node_modules/.bin:${PATH}"
 
 # figure out which projects we should deploy/publish
 if [ -e ${DEPLOYMENT_FILE_LOCATION} ]; then
